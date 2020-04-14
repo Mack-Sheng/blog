@@ -5,9 +5,9 @@ import {
     AppstoreOutlined,
 } from '@ant-design/icons';
 import {Layout, Menu} from 'antd';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Link, Switch, Route,Redirect} from 'react-router-dom';
 import {Spin} from 'antd';
-import menus from '../menu';
+import menus from './menu';
 
 const {Header, Sider, Content} = Layout;
 
@@ -53,6 +53,8 @@ export default class extends Component {
                             />
                         );
                     })}
+                    <Redirect to='/Welcome' from='/' exact/>
+                    <Redirect to='/NotFound' exact/>
                 </Switch>
             </Suspense>
         );
@@ -92,8 +94,8 @@ export default class extends Component {
                         className="site-layout-background"
                         style={{
                             margin: '24px 16px',
-                            padding: 24,
-                            minHeight: 280,
+                            // padding: 24,
+                            // minHeight: 280,
                         }}
                     >
                         {this.content}
