@@ -37,3 +37,4 @@ export const deleteArticleById = (id) => {
     // console.log('zhixingle')
     return service.post(`/api/v1/articDelete/${id}`)
 }
+

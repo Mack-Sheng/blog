@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import { Card,Button ,Table,Modal, message} from 'antd';
 import {getArticles,deleteArticleById} from '../../requests'
 import moment from 'moment'
+import {Link,Route} from 'react-router-dom'
+import {adminRouter} from '../menu'
 
 
 // @inject('articleStore')
@@ -56,15 +58,15 @@ export default class Article extends Component {
             render:(text,record)=>{
                 return (
                 <ButtonGroup>
-                    <Button size='small' type='primary'>编辑</Button>
-                    <Button size='small' type='danger' onClick={this.deleteArticle1.bind(this,record.id)}>删除</Button>
+                    <Link to='/admin/article/edit'><Button size='small' type='primary' >编辑</Button></Link>
+                    <Button size='small' type='danger' onClick={this.deleteArticle1.bind(this,record)}>删除</Button>
                 </ButtonGroup>)
             }
         })
         return columns
     }
 
-    
+
     getData = ()=>{
         getArticles(this.state.offset,this.state.limited).then(resp=>{
            const columnsKeys = Object.keys(resp.list[0])
@@ -77,9 +79,10 @@ export default class Article extends Component {
         })
     }
 
-   
+  
 
     deleteArticle1 = (record) =>{
+        const that = this
         Modal.confirm({
             title:`确定要删除这项吗？`,
             okText:'确定',
@@ -87,7 +90,8 @@ export default class Article extends Component {
             onOk() {
                 deleteArticleById(record.id).then(resp=>{
                     message.success(resp.msg)
-                    this.getData()
+                }).finally(()=>{
+                    that.getData()
                 })
             }
         })
@@ -110,7 +114,7 @@ export default class Article extends Component {
     render() {
         return  <Card size="small" 
                     title="文章列表" 
-                     extra={<Button>编辑</Button>} >
+                     extra={<Button>保存</Button>} >
         <Table 
         rowKey={record=>record.id}
         dataSource={this.state.dataSource} 

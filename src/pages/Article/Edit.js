@@ -3,9 +3,7 @@ import React, { Component } from 'react'
 export default class Edit extends Component {
     render() {
         return (
-            <div>
-                文章编辑
-            </div>
+            <h1>这里是编辑页</h1>
         )
     }
 }

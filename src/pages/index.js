@@ -5,9 +5,12 @@ import {
     AppstoreOutlined,
 } from '@ant-design/icons';
 import {Layout, Menu} from 'antd';
-import {Link, Switch, Route,Redirect} from 'react-router-dom';
+import {Link, Switch, Route} from 'react-router-dom';
 import {Spin} from 'antd';
 import menus from './menu';
+import {adminRouter} from './menu'
+
+
 
 const {Header, Sider, Content} = Layout;
 
@@ -43,22 +46,22 @@ export default class extends Component {
         return (
             <Suspense fallback={<Spin />}>
                 <Switch>
-                    {menus.map(({path, Component: C, index}) => {
+                    {menus.map(({path, Component, index}) => {
                         return (
                             <Route
                                 exact={index}
-                                path={path}
-                                component={C}
+                                path={path} 
+                                component={Component}
                                 key={path}
                             />
                         );
                     })}
-                    <Redirect to='/Welcome' from='/' exact/>
-                    <Redirect to='/NotFound' exact/>
+                    {/* <Route component={adminRouter.Component} path={adminRouter.path}/> */}
                 </Switch>
             </Suspense>
         );
     }
+
 
     render() {
         return (
@@ -69,7 +72,7 @@ export default class extends Component {
                     collapsed={this.state.collapsed}
                 >
                     {this.state.collapsed ? (
-                        <AppstoreOutlined className="logo" />
+                        <AppstoreOutlined className="logo"/>
                     ) : (
                         <div className="logo">博客后台</div>
                     )}

@@ -18,15 +18,11 @@ export default [
         path: '/label',
         IconComponent: AppleOutlined,
         Component: lazy(() => import('./Label')),
-    },
-    {   
-        title:'设置',
-        path:'/settings',
-        IconComponent: AppleOutlined,
-        Component:lazy(() => import('./Settings'))
     }
 ];
 
-
-
+export const adminRouter = [{
+    path:'/admin/article/edit',
+    Component:lazy(() => import('./Article/Edit'))
+}]
 
